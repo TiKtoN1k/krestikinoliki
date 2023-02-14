@@ -22,7 +22,7 @@ namespace krestikinoliki;
 public partial class MainWindow : Window
 {
     public static int[] krestiki_noliki;
-    public static bool xoxo = true;
+    public static bool xo = true;
     private int IsFinished()
     {
         for (int i = 0; i <= 6; i += 3)
