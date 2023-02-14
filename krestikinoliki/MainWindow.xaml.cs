@@ -83,15 +83,15 @@ public partial class MainWindow : Window
         Button8.IsEnabled = true;
         Button9.Content = "";
         Button9.IsEnabled = true;
-        if (xoxo == true)
+        if (xo == true)
         {
-            xoxo = false;
+            xo = false;
         }
         else
         {
-            xoxo = true;
+            xo = true;
         }
-        if (xoxo == true) Bot();
+        if (xo == true) Bot();
     }
     private void Hod(bool player, int r)
     {
@@ -157,7 +157,7 @@ public partial class MainWindow : Window
         }
         else
         {
-            Hod(!xoxo, r);
+            Hod(!xo, r);
         }
         int ff = IsFinished();
         if (ff == 1)
@@ -191,7 +191,7 @@ public partial class MainWindow : Window
 
     private void Button1_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 0);
+        Hod(xo, 0);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -214,7 +214,7 @@ public partial class MainWindow : Window
     }
     private void Button2_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 1);
+        Hod(xo, 1);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -237,7 +237,7 @@ public partial class MainWindow : Window
     }
     private void Button3_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 2);
+        Hod(xo, 2);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -260,7 +260,7 @@ public partial class MainWindow : Window
     }
     private void Button4_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 3);
+        Hod(xo, 3);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -283,7 +283,7 @@ public partial class MainWindow : Window
     }
     private void Button5_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 4);
+        Hod(xo, 4);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -307,7 +307,7 @@ public partial class MainWindow : Window
     }
     private void Button6_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 5);
+        Hod(xo, 5);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -330,7 +330,7 @@ public partial class MainWindow : Window
     }
     private void Button7_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 6);
+        Hod(xo, 6);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -353,7 +353,7 @@ public partial class MainWindow : Window
     }
     private void Button8_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 7);
+        Hod(xo, 7);
         int ff = IsFinished();
         if (ff == 1)
         {
@@ -376,7 +376,7 @@ public partial class MainWindow : Window
     }
     private void Button9_Click(object sender, RoutedEventArgs e)
     {
-        Hod(xoxo, 8);
+        Hod(xo, 8);
         int ff = IsFinished();
         if (ff == 1)
         {
