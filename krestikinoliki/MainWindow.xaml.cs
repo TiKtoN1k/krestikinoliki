@@ -12,52 +12,60 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-
+using Pobediteli;
+using System.IO;
+using RegWin;
 namespace krestikinoliki;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
+/// 
+
+public static class RegWin
+{
+    private static List<char> getHistory()
+    {
+        List<char> history = new List<char>();
+
+        history = JsonSerialization.deserialize<List<char>>("history.json");
+
+        return history;
+    }
+
+
+    private static void saveHistory(List<char> history)
+    {
+        JsonSerialization.serialize(history, "history.json");
+    }
+
+    public static void win_x()
+    {
+        List<char> history = getHistory();
+        history.Add('x');
+        saveHistory(history);
+    }
+
+    public static void win_o()
+    {
+        List<char> history = getHistory();
+        history.Add('o');
+        saveHistory(history);
+    }
+
+    public static void win_NO()
+    {
+        List<char> history = getHistory();
+        history.Add('_');
+        saveHistory(history);
+    }
+}
+
 public partial class MainWindow : Window
 {
     public static int[] krestiki_noliki;
     public static bool xo = true;
-    private int IsFinished()
-    {
-        for (int i = 0; i <= 6; i += 3)
-        {
-            if (krestiki_noliki[i] == krestiki_noliki[i + 1] && krestiki_noliki[i + 1] == krestiki_noliki[i + 2] && krestiki_noliki[i + 2] != 0)
-            {
-                return krestiki_noliki[i];
-            }
-        }
-        for (int i = 0; i < 3; i++)
-        {
-            if (krestiki_noliki[i] == krestiki_noliki[i + 3] && krestiki_noliki[i + 3] == krestiki_noliki[i + 6] && krestiki_noliki[i + 6] != 0)
-            {
-                return krestiki_noliki[i];
-            }
-        }
-        if (krestiki_noliki[0] == krestiki_noliki[4] && krestiki_noliki[4] == krestiki_noliki[8] && krestiki_noliki[8] != 0)
-        {
-            return krestiki_noliki[0];
-        }
-        else if (krestiki_noliki[2] == krestiki_noliki[4] && krestiki_noliki[4] == krestiki_noliki[6] && krestiki_noliki[6] != 0)
-        {
-            return krestiki_noliki[2];
-        }
-        bool nichya = true;
-        for (int i = 0; i < 9; i++)
-        {
-            if (krestiki_noliki[i] == 0)
-            {
-                nichya = false;
-            }
-        }
-        if (nichya == true) return 3;
-        return 0;
-    }
+    
     private void StartGame()
     {
         krestiki_noliki = new int[9];
@@ -159,18 +167,18 @@ public partial class MainWindow : Window
         {
             Hod(!xo, r);
         }
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -181,6 +189,14 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        if (File.Exists("history.json"))
+        {
+
+        }
+        else
+        {
+            JsonSerialization.serialize(new List<string>(), "history.json");
+        }
         StartGame();
     }
 
@@ -192,18 +208,18 @@ public partial class MainWindow : Window
     private void Button1_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 0);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -215,18 +231,18 @@ public partial class MainWindow : Window
     private void Button2_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 1);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -238,18 +254,18 @@ public partial class MainWindow : Window
     private void Button3_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 2);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -261,18 +277,18 @@ public partial class MainWindow : Window
     private void Button4_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 3);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -284,19 +300,19 @@ public partial class MainWindow : Window
     private void Button5_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 4);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
 
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -308,22 +324,22 @@ public partial class MainWindow : Window
     private void Button6_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 5);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
-            Bot();
+            Bot(); 
             return;
         }
         StartGame();
@@ -331,18 +347,18 @@ public partial class MainWindow : Window
     private void Button7_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 6);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -354,18 +370,18 @@ public partial class MainWindow : Window
     private void Button8_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 7);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
@@ -377,18 +393,18 @@ public partial class MainWindow : Window
     private void Button9_Click(object sender, RoutedEventArgs e)
     {
         Hod(xo, 8);
-        int ff = IsFinished();
+        int ff = CheckWin.IsFinished(krestiki_noliki);
         if (ff == 1)
         {
-            MessageBox.Show("Победа x!");
+            MessageBox.Show("Победа x!"); RegWin.win_x();
         }
         else if (ff == 2)
         {
-            MessageBox.Show("Победа o!");
+            MessageBox.Show("Победа o!"); RegWin.win_o();
         }
         else if (ff == 3)
         {
-            MessageBox.Show("Ничья");
+            MessageBox.Show("Ничья!"); RegWin.win_NO();
         }
         else
         {
